@@ -158,10 +158,11 @@ def run_test_draw_circles_from_rectangle():
     draw_circles_from_rectangle(8, 3, rectangle, window1)
 
     window1.close_on_mouse_click()
+
     window2 = rg.RoseWindow(620, 380)
 
     # Test 3:
-    rectangle = rg.Rectangle(rg.Point(350, 280), rg.Point(375.330))
+    rectangle = rg.Rectangle(rg.Point(350, 280), rg.Point(375, 330))
     rectangle.fill_color = 'yellow'
     draw_circles_from_rectangle(6, 10, rectangle, window2)
 
@@ -338,6 +339,34 @@ def draw_lines_from_rectangles(rectangle1, rectangle2, n, window):
     #          ** FIRST DO A CONCRETE EXAMPLE BY HAND! **
     ####################################################################
     # ------------------------------------------------------------------
+    rectangle1.attach_to(window)
+    rectangle2.attach_to(window)
+    center1 = rectangle1.get_center()
+    center2 = rectangle2.get_center()
+    height = rectangle1.get_height()
+    width = rectangle1.get_width()
+    x1 = center1.x
+    y1 = center1.y
+    x2 = center2.x
+    y2 = center2.y
+    for _ in range(n):
+        line = rg.Line(center1, center2)
+        x1 = x1 - width/2
+        y1 = y1 + height/2
+        x2 = x2 - width/2
+        y2 = y2 + height/2
+        center1 = rg.Point(x1, y1)
+        center2 = rg.Point(x2, y2)
+        if _ % 2 == 0:
+            line.color = rectangle1.outline_color
+        else:
+            line.color = rectangle2.outline_color
+
+        line.attach_to(window)
+
+    window.render()
+
+
 
 
 # ----------------------------------------------------------------------
